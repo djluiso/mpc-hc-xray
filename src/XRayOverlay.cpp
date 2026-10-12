@@ -797,6 +797,9 @@ namespace XRay
     void Overlay::RenderButton()
     {
         Layered& w = m_button;
+        if (!w.hwnd || m_panelOpen || !m_paused) {
+            return; // a late hover/leave repaint must not show the hidden button again
+        }
         w.width = (int)S(104);
         w.height = (int)S(40);
         w.pos = { m_video.left + (LONG)S(24), m_video.top + (LONG)S(24) };
